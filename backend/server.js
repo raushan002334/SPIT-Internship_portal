@@ -9,6 +9,9 @@ const uploadRoutes = require('./routes/upload');
 const analyticsRoutes = require('./routes/analytics');
 const groupRoutes = require('./routes/groups');
 const mentorEditRoutes = require('./routes/mentor-edit');
+const authRoutes = require('./routes/auth');
+const weeklyReportsRoutes = require('./routes/weeklyReports');
+const { authenticate } = require('./middleware/auth');
 
 // Load .env from root directory or backend directory
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
@@ -40,11 +43,13 @@ mongoose.connect(MONGODB_URI, {
 .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/api/internships', internshipRoutes);
-app.use('/api/upload', uploadRoutes);
-app.use('/api/analytics', analyticsRoutes);
-app.use('/api/groups', groupRoutes);
-app.use('/api/mentor', mentorEditRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/internships', authenticate, internshipRoutes);
+app.use('/api/upload', authenticate, uploadRoutes);
+app.use('/api/analytics', authenticate, analyticsRoutes);
+app.use('/api/groups', authenticate, groupRoutes);
+app.use('/api/mentor', authenticate, mentorEditRoutes);
+app.use('/api/weekly-reports', authenticate, weeklyReportsRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

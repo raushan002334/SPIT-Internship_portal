@@ -12,7 +12,7 @@ import {
   updateGroup,
   clearAllGroups
 } from '../api/groups';
-import axios from 'axios';
+import api from '../api/axios';
 import * as XLSX from 'xlsx';
 
 const AllGroups = () => {
@@ -219,8 +219,8 @@ const AllGroups = () => {
     });
     try {
       const [externalRes, internalRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/upload/mentors'),
-        axios.get('http://localhost:5000/api/upload/internal-mentors')
+        api.get('/upload/mentors'),
+        api.get('/upload/internal-mentors')
       ]);
       if (externalRes.data.success) setAvailableExternalMentors(externalRes.data.data);
       if (internalRes.data.success) setAvailableInternalMentors(internalRes.data.data);

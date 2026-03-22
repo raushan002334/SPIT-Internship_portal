@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const SIDEBAR_WIDTH = 'w-60';
 
@@ -16,6 +17,7 @@ const navigation = [
       { name: 'Internship Overview', href: '/internships' },
       { name: 'Student Record Edit', href: '/mentor-edit' },
       { name: 'Random Student Picker', href: '/picker' },
+      { name: 'Weekly Reports', href: '/weekly-reports' },
     ],
   },
   {
@@ -41,6 +43,7 @@ const navigation = [
     group: 'Data Import',
     items: [
       { name: 'Upload Excel Data', href: '/upload' },
+      { name: 'Import Weekly Reports', href: '/import-weekly-reports' },
     ],
   },
 ];
@@ -48,6 +51,7 @@ const navigation = [
 const Layout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   const isActive = (href) =>
     href === '/' ? location.pathname === '/' : location.pathname.startsWith(href);
@@ -133,6 +137,17 @@ const Layout = ({ children }) => {
             <span className="text-sm text-gray-500 font-medium">
               Internship Analysis Portal &mdash; Administrative View
             </span>
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-gray-500 hidden sm:inline">
+                {user?.name || user?.email}
+              </span>
+              <button
+                onClick={logout}
+                className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </header>
 

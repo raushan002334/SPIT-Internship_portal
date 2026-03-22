@@ -9,6 +9,14 @@ const axiosInstance = axios.create({
   },
 });
 
+axiosInstance.interceptors.request.use((config) => {
+  const token = sessionStorage.getItem('auth_token') || localStorage.getItem('auth_token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 // Internships endpoints
 export const getInternships = (filters = {}) => {
   const params = new URLSearchParams();

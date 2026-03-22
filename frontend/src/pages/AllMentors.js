@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 
 const AllMentors = () => {
   const [activeTab, setActiveTab] = useState('external');
@@ -44,7 +44,7 @@ const AllMentors = () => {
   const fetchExternalMentors = async () => {
     try {
       setExternalLoading(true);
-      const response = await axios.get('http://localhost:5000/api/upload/mentors-with-details');
+      const response = await api.get('/upload/mentors-with-details');
       if (response.data.success) { setExternalMentors(response.data.data); setFilteredExternalMentors(response.data.data); }
     } catch (error) {
       setMessage({ type: 'error', text: error.response?.data?.message || 'Error loading external mentors' });
@@ -54,7 +54,7 @@ const AllMentors = () => {
   const fetchInternalMentors = async () => {
     try {
       setInternalLoading(true);
-      const response = await axios.get('http://localhost:5000/api/upload/internal-mentors-with-details');
+      const response = await api.get('/upload/internal-mentors-with-details');
       if (response.data.success) { setInternalMentors(response.data.data); setFilteredInternalMentors(response.data.data); }
     } catch (error) {
       setMessage({ type: 'error', text: error.response?.data?.message || 'Error loading internal mentors' });
@@ -64,7 +64,7 @@ const AllMentors = () => {
   const handleDeleteExternalMentor = async (mentorId, mentorName) => {
     if (!window.confirm(`Delete External Mentor: ${mentorName}? This action cannot be undone.`)) return;
     try {
-      const response = await axios.delete(`http://localhost:5000/api/upload/mentors/${mentorId}`);
+      const response = await api.delete(`/upload/mentors/${mentorId}`);
       if (response.data.success) { setMessage({ type: 'success', text: response.data.message }); fetchExternalMentors(); }
     } catch (error) {
       setMessage({ type: 'error', text: error.response?.data?.message || 'Error deleting external mentor' });
@@ -74,7 +74,7 @@ const AllMentors = () => {
   const handleDeleteInternalMentor = async (mentorId, mentorName) => {
     if (!window.confirm(`Delete Internal Mentor: ${mentorName}? This action cannot be undone.`)) return;
     try {
-      const response = await axios.delete(`http://localhost:5000/api/upload/internal-mentors/${mentorId}`);
+      const response = await api.delete(`/upload/internal-mentors/${mentorId}`);
       if (response.data.success) { setMessage({ type: 'success', text: response.data.message }); fetchInternalMentors(); }
     } catch (error) {
       setMessage({ type: 'error', text: error.response?.data?.message || 'Error deleting internal mentor' });
@@ -86,7 +86,7 @@ const AllMentors = () => {
     if (!window.confirm(`Final confirmation: Delete ${externalMentors.length} external mentors?`)) return;
     try {
       setExternalLoading(true);
-      const response = await axios.delete('http://localhost:5000/api/upload/mentors');
+      const response = await api.delete('/upload/mentors');
       if (response.data.success) { setMessage({ type: 'success', text: response.data.message }); fetchExternalMentors(); }
     } catch (error) {
       setMessage({ type: 'error', text: error.response?.data?.message || 'Error deleting external mentors' });
@@ -98,7 +98,7 @@ const AllMentors = () => {
     if (!window.confirm(`Final confirmation: Delete ${internalMentors.length} internal mentors?`)) return;
     try {
       setInternalLoading(true);
-      const response = await axios.delete('http://localhost:5000/api/upload/internal-mentors');
+      const response = await api.delete('/upload/internal-mentors');
       if (response.data.success) { setMessage({ type: 'success', text: response.data.message }); fetchInternalMentors(); }
     } catch (error) {
       setMessage({ type: 'error', text: error.response?.data?.message || 'Error deleting internal mentors' });
