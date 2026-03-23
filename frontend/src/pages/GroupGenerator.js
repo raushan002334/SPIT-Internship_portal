@@ -1,6 +1,5 @@
 ﻿import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
-import { exportGroups as exportGroupsOld } from '../api/axios';
 import { generateGroups, listGroups, unassignStudents } from '../api/groups';
 
 const branches = ['COMPS', 'EXTC', 'CSE', 'MCA', 'AIML', 'IT', 'MECH', 'ETRX'];
