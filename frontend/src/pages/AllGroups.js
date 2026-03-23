@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   listGroupsWithMentors, 
   exportGroups, 
@@ -10,7 +10,6 @@ import {
   searchGroups,
   syncMentors,
   updateGroup,
-  clearAllGroups
 } from '../api/groups';
 import api from '../api/axios';
 import * as XLSX from 'xlsx';

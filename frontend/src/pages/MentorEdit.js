@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getInternships, updateInternship, deleteInternship } from '../api/axios';
 
 const MentorEdit = () => {

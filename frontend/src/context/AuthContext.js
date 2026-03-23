@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getCurrentUser, loginUser, signupUser } from '../api/auth';
 
 const AuthContext = createContext(null);
@@ -72,17 +72,14 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const value = useMemo(
-    () => ({
-      user,
-      isAuthenticated: Boolean(user),
-      loading,
-      login,
-      signup,
-      logout,
-    }),
-    [user, loading]
-  );
+  const value = {
+    user,
+    isAuthenticated: Boolean(user),
+    loading,
+    login,
+    signup,
+    logout,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

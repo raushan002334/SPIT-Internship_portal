@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 import { generateGroups, listGroups, unassignStudents } from '../api/groups';
 
