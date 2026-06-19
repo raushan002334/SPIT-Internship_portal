@@ -112,6 +112,11 @@ npm run client
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:5000
 
+## Contributors
+
+- **Raushan Kumar** - [@raushan002334](https://github.com/raushan002334)
+- **Soham** - [@Soham-dotcom](https://github.com/Soham-dotcom)
+
 ## Contributing
 
 This is an internal project for SPIT. For any issues or suggestions, please contact the development team.
