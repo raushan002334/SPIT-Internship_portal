@@ -1,16 +1,40 @@
 # SPIT Internship Management & Analytics Portal
 
-A centralized internship portal for SPIT coordinators and mentors to manage internship details, track progress, analyze company-wise hiring, generate groups, and pick students randomly.
+> **Currently in use by SPIT for the batch of 2026 passing students**
+> 
+> **Project created under the guidance of Prof. Vandana Wekhande, SPIT Senior Faculty**
 
-## Features
+---
 
-- 📊 **Dashboard Analytics**: View summary cards and charts for internships, companies, and students
+## Overview
+
+An intelligent, automated internship evaluation and management platform that revolutionizes how institutions evaluate final-year students pursuing internships. This portal transforms the traditionally manual and time-intensive evaluation process into a seamless, efficient workflow—enabling colleges to evaluate 400+ students in minutes while maintaining rigorous evaluation standards.
+
+### The Problem We Solved
+
+**Legacy Evaluation Process (Manual & Time-Intensive):**
+- Weekly progress tracking through manual reports
+- Complex group formation process for batching 400+ students
+- Dual evaluation requirement: Internal mentors + External mentors (alumni)
+- Manual assignment of mentors to student groups
+- Individual email communications to each group
+- Manual collection of evaluation marks from multiple sources
+- Time-consuming report generation
+
+**Our Solution:**
+This platform automates the entire evaluation lifecycle—from intelligent group generation to automated mentor assignment, email distribution, centralized evaluation scoring, and instant report generation—all achievable in minutes with zero manual intervention.
+
+## Key Features
+
+- 📊 **Automated Group Generation**: Intelligently create student evaluation groups with customizable filters
+- 📧 **One-Click Communication**: Generate and send evaluation emails to all mentor-student groups simultaneously
+- ⭐ **Integrated Evaluation System**: Centralized evaluation interface for internal and external mentors based on predefined rubrics
+- 📈 **Automated Scoring & Reporting**: Calculate final marks according to evaluation rubrics and generate comprehensive reports instantly
 - 📝 **Internship Management**: List, filter, and manage all internship records
-- 📤 **Excel Import/Export**: Upload Excel files to import data and export filtered results
-- 👥 **Group Generator**: Create student groups with customizable filters
-- 🎲 **Random Student Picker**: Randomly select students based on filters
-- 📈 **Company Analytics**: Analyze hiring patterns, branch distribution, and stipend data
+- 📤 **Excel Import/Export**: Upload Excel files to import data and export results with reports
+- 📊 **Dashboard Analytics**: View summary cards and charts for internships, companies, branches, and students
 - 🔍 **Advanced Filtering**: Filter by branch, company, status, mentor, year, and more
+- 📈 **Company Analytics**: Analyze hiring patterns, branch distribution, and stipend data
 
 ## Tech Stack
 
@@ -21,6 +45,7 @@ A centralized internship portal for SPIT coordinators and mentors to manage inte
 - Mongoose
 - XLSX (Excel processing)
 - Multer (File uploads)
+- Nodemailer (Email automation)
 
 ### Frontend
 - React.js
@@ -118,6 +143,11 @@ npm run client
 - `POST /api/groups/random-pick` - Pick random students
 - `POST /api/groups/export-random` - Export random students to Excel
 
+### Evaluation
+- `POST /api/evaluation/send-mails` - Send evaluation emails to groups
+- `POST /api/evaluation/submit` - Submit evaluation marks
+- `GET /api/evaluation/report` - Generate evaluation report
+
 ## Data Model
 
 The system uses the following data structure for internships:
@@ -150,10 +180,13 @@ The system uses the following data structure for internships:
   mentor: {
     name: String,
     email: String,
-    designation: String
+    designation: String,
+    type: String (internal|external)
   },
   evaluation: {
-    rating: Number (0-5),
+    internalMentorRating: Number (0-5),
+    externalMentorRating: Number (0-5),
+    finalMarks: Number,
     feedback: String,
     skills: [String]
   },
@@ -172,16 +205,3 @@ This is an internal project for SPIT. For any issues or suggestions, please cont
 ## License
 
 ISC
-
-
-
-
-
-
-
-
-
-
-
-
-
