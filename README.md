@@ -28,13 +28,12 @@ This platform automates the entire evaluation lifecycle—from intelligent group
 
 - 📊 **Automated Group Generation**: Intelligently create student evaluation groups with customizable filters
 - 📧 **One-Click Communication**: Generate and send evaluation emails to all mentor-student groups simultaneously
-- ⭐ **Integrated Evaluation System**: Centralized evaluation interface for internal and external mentors based on predefined rubrics
-- 📈 **Automated Scoring & Reporting**: Calculate final marks according to evaluation rubrics and generate comprehensive reports instantly
+- ⭐ **Integrated Evaluation System**: Centralized evaluation interface for internal and external mentors
+- 📈 **Automated Scoring & Reporting**: Calculate final marks and generate comprehensive reports instantly
 - 📝 **Internship Management**: List, filter, and manage all internship records
-- 📤 **Excel Import/Export**: Upload Excel files to import data and export results with reports
-- 📊 **Dashboard Analytics**: View summary cards and charts for internships, companies, branches, and students
+- 📤 **Excel Import/Export**: Upload Excel files to import data and export results
+- 📊 **Dashboard Analytics**: View summary cards and charts for internships, companies, and students
 - 🔍 **Advanced Filtering**: Filter by branch, company, status, mentor, year, and more
-- 📈 **Company Analytics**: Analyze hiring patterns, branch distribution, and stipend data
 
 ## Tech Stack
 
@@ -112,91 +111,6 @@ npm run client
 7. Access the application:
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:5000
-
-## API Endpoints
-
-### Internships
-- `GET /api/internships` - Get all internships with filters
-- `GET /api/internships/:id` - Get single internship
-- `POST /api/internships` - Create new internship
-- `PUT /api/internships/:id` - Update internship
-- `DELETE /api/internships/:id` - Delete internship
-- `GET /api/internships/stats/summary` - Get summary statistics
-
-### Upload
-- `POST /api/upload/excel` - Parse Excel file
-- `POST /api/upload/import` - Import parsed data to MongoDB
-- `GET /api/upload/template` - Download Excel template
-
-### Analytics
-- `GET /api/analytics/companies` - Company-wise statistics
-- `GET /api/analytics/branches` - Branch distribution
-- `GET /api/analytics/status` - Status distribution
-- `GET /api/analytics/companies/branches` - Branch distribution per company
-- `GET /api/analytics/stipends` - Stipend comparison
-- `GET /api/analytics/types` - Internship type distribution
-- `GET /api/analytics/summary` - Comprehensive summary
-
-### Groups
-- `POST /api/groups/generate` - Generate student groups
-- `POST /api/groups/export` - Export groups to Excel
-- `POST /api/groups/random-pick` - Pick random students
-- `POST /api/groups/export-random` - Export random students to Excel
-
-### Evaluation
-- `POST /api/evaluation/send-mails` - Send evaluation emails to groups
-- `POST /api/evaluation/submit` - Submit evaluation marks
-- `GET /api/evaluation/report` - Generate evaluation report
-
-## Data Model
-
-The system uses the following data structure for internships:
-
-```javascript
-{
-  student: {
-    name: String,
-    email: String,
-    phone: String,
-    rollNo: String,
-    branch: String (comps|extc|cse|mca|aiml),
-    year: String,
-    avatar: String (optional)
-  },
-  company: {
-    name: String,
-    location: String,
-    website: String
-  },
-  internship: {
-    title: String,
-    type: String,
-    duration: String,
-    startDate: Date,
-    endDate: Date,
-    stipend: String,
-    status: String (pending|approved|in-progress|completed|cancelled)
-  },
-  mentor: {
-    name: String,
-    email: String,
-    designation: String,
-    type: String (internal|external)
-  },
-  evaluation: {
-    internalMentorRating: Number (0-5),
-    externalMentorRating: Number (0-5),
-    finalMarks: Number,
-    feedback: String,
-    skills: [String]
-  },
-  submittedAt: Date
-}
-```
-
-## Excel Template
-
-Download the Excel template from the Upload page to see the required format for importing data. The template includes all necessary columns with sample data.
 
 ## Contributing
 
